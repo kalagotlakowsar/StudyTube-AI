@@ -7,7 +7,7 @@ import {
 } from '../types';
 
 
-const API_BASE = '/api';
+const API_BASE = import.meta.env.VITE_API_URL || '/api';
 
 export const apiClient = axios.create({
   baseURL: API_BASE,
@@ -234,15 +234,15 @@ export const notesApi = {
 export const exportApi = {
   downloadPdfUrl: (videoId: number) => {
     const token = localStorage.getItem('studytube_token');
-    return `/api/export/pdf/${videoId}${token ? `?token=${encodeURIComponent(token)}` : ''}`;
+    return `${API_BASE}/export/pdf/${videoId}${token ? `?token=${encodeURIComponent(token)}` : ''}`;
   },
   downloadMarkdownUrl: (videoId: number) => {
     const token = localStorage.getItem('studytube_token');
-    return `/api/export/markdown/${videoId}${token ? `?token=${encodeURIComponent(token)}` : ''}`;
+    return `${API_BASE}/export/markdown/${videoId}${token ? `?token=${encodeURIComponent(token)}` : ''}`;
   },
   downloadTextUrl: (videoId: number) => {
     const token = localStorage.getItem('studytube_token');
-    return `/api/export/text/${videoId}${token ? `?token=${encodeURIComponent(token)}` : ''}`;
+    return `${API_BASE}/export/text/${videoId}${token ? `?token=${encodeURIComponent(token)}` : ''}`;
   },
 };
 
